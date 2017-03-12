@@ -1,0 +1,19 @@
+{
+  "paths": {
+    "src": "./src",
+    "dist": "./dist",
+    "sourcemaps": "./sourcemaps"
+  },
+  "clean": {
+    "srcArgs": [
+      "./dist/*.js",
+      "./dist/sourcemaps"
+    ]
+  },
+  "js": {
+    "srcArgs": [
+      "./src/*.js",
+      {"base": "./src"}
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "revealing-module-factory-js",
+  "version": "1.0.0",
+  "description": "Revealing Module factory pattern.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elycruz/revealing-module-factory-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elycruz/revealing-module-factory-js/issues"
+  },
+  "homepage": "https://github.com/elycruz/revealing-module-factory-js#readme",
+  "dependencies": {
+    "fjl": "^0.8.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chalk": "^1.1.3",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-fncallback": "^2.0.2",
+    "gulp-header": "^1.8.8",
+    "gulp-if": "^2.0.2",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.0.1",
+    "karma": "^1.5.0",
+    "mocha": "^3.2.0",
+    "requirejs": "^2.3.3",
+    "yargs": "^6.6.0"
+  }
+}
