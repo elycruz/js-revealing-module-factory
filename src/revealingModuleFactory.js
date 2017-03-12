@@ -8,12 +8,13 @@ const _undefined = 'undefined';
 
 /**
  * Sets an enumerable property (with value) on an object.
+ * @function defineEnumPropValue
  * @param onObj {Object}
  * @param propName {String}
  * @param value {*}
  * @returns {Object}
  */
-export function defineEnumPropValue (onObj, propName, value) {
+function defineEnumPropValue (onObj, propName, value) {
     return Object.defineProperty(onObj, propName, {
         value: value,
         enumerable: true
@@ -28,7 +29,7 @@ export function defineEnumPropValue (onObj, propName, value) {
  * @param [valueToSet=undefined] {*} - Value to set.  Optional.  Default `undefined`.
  * @returns {*} - Object that was passed in.
  */
-export function unConfigurableNamespace (nsString, obj, valueToSet)  {
+function unConfigurableNamespace (nsString, obj, valueToSet)  {
     const shouldSetValue = typeof valueToSet !== _undefined;
 
     // Reduce original object to itself with requested modifications
@@ -73,7 +74,7 @@ export function unConfigurableNamespace (nsString, obj, valueToSet)  {
  *   myModule.some.namespace.Hello === Hello;   // `true`
  *
  *   // Error is thrown here as property is not `writable` and
- *   // property is not `configurable` (protected).
+ *   // property is not `configurable` or in essence protected.
  *   myModule.SomeMember = Hello;
  *
  * ```
@@ -82,7 +83,7 @@ export function unConfigurableNamespace (nsString, obj, valueToSet)  {
  * @module revealingModuleFactory
  * @returns {revealingModule} - Revealing module function (store members on itself and makes them un-'configurable' (as propert(y|ies))).
  */
-export function revealingModuleFactory () {
+function revealingModuleFactory () {
     return function revealingModule (nsString, value) {
         return typeof nsString === _undefined ?
             revealingModule : unConfigurableNamespace(nsString, revealingModule, value);

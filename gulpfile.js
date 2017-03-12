@@ -4,7 +4,7 @@
 
 'use strict';
 
-const path =      require('path'),
+const path =    require('path'),
     crypto =    require('crypto'),
     gulp =      require('gulp'),
     eslint =    require('gulp-eslint'),
@@ -12,6 +12,8 @@ const path =      require('path'),
     header =    require('gulp-header'),
     fncallback = require('gulp-fncallback'),
     sourcemaps = require('gulp-sourcemaps'),
+    rollup =    require('gulp-better-rollup'),
+    babel =     require('gulp-babel'),
     gulpIf =    require('gulp-if'),
     del =       require('del'),
     chalk =     require('chalk'),
@@ -27,6 +29,8 @@ const path =      require('path'),
         '<%= hashAlgo.toUpperCase() %> Checksum: <%= fileHash %> | Generated: <%= date %>',
 
     minifiedFileHeader = '/**! ' + fileHeaderBody + ' **/',
+
+    iifeFileName = 'revealingModuleFactory',
 
     argv = require('yargs')
         .default('dev', false)
@@ -54,19 +58,13 @@ function eslintTask () {
         .pipe(eslint.failAfterError());
 }
 
-function uglifyJs (srcArgs, dest) {
-    return gulp.src.apply(gulp, srcArgs)
-        .pipe(sourcemaps.init())
-        .pipe(gulpIf(!devMode, uglify()))
-        .pipe(gulpIf(!devMode, sourcemaps.write(gulpConfig.paths.sourcemaps)))
-        .pipe(gulp.dest(dest))
-}
-
 function buildJs () {
     const hashAlgo = 'sha1',
         data = {hashAlgo: hashAlgo, date: new Date()};
     return gulp.src.apply(gulp, gulpConfig.js.srcArgs)
         .pipe(sourcemaps.init())
+        .pipe(rollup({exports: 'named', moduleName: iifeFileName, format: 'iife'}))
+        .pipe(babel())
         .pipe(gulpIf(!devMode, uglify()))
         .pipe(fncallback(function (file, enc, cb) {
             const hasher = crypto.createHash(hashAlgo);
