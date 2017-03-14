@@ -1,8 +1,5 @@
 # revealing-module-factory-js
-A revealing module factory method for easily creating and using the revealing module pattern for
-projects that don't require an amd, umd, or commonjs architecture (for small projects though
-also useful for large projects that have revealing module patterns that folks
-have started adding direct properties to).
+A revealing module factory method for easily creating and using the revealing module pattern.
 
 ### Features:
 - Sets modules on itself (for easy access).
@@ -34,13 +31,15 @@ myModule.thing === thing; // true
 myModule('all.the.things', things);
 myModule.all.the.things === things; // true
 
-// Once your namespaces are written they become unsettable (not `writable` or `configurable`)
+// Once your namespaces are written they become unsettable 
+// (not `writable` or `configurable`)
 myModule.all.the.things = function OtherThings() {};
 
 // ""
 myModule.all.the.things === things; // true
 
-// Also calls to your module as a setter (called with namespace string and value) return itself
+// Also calls to your module as a setter (called with 
+// namespace string and value) return itself
 const multiple = {},
       all = {},
       once = {};
@@ -52,6 +51,13 @@ myModule('setting', multiple)
         
 // Using myModule call as a getter
 myModule('all.the.things') === things; // true
+
+// Setting and getting a namespace all at once
+myModule('all.your.base.are.belong.to.us');
+  
+// Note the initial 'all' in the previous example;  It already 
+// exists (was set further up in the script) and gets reused - 
+//  doesn't get recreated or overwritten.
 
 ```
 
