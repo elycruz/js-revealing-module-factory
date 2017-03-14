@@ -2,24 +2,22 @@
   "name": "revealing-module-factory-js",
   "version": "1.0.0",
   "description": "Revealing Module factory pattern.",
-  "main": "index.js",
+  "main": "dist/revealingModuleFactory.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elycruz/revealing-module-factory-js.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ely De La Cruz <elycruz -at- elycruz -dot- com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/elycruz/revealing-module-factory-js/issues"
   },
   "homepage": "https://github.com/elycruz/revealing-module-factory-js#readme",
-  "dependencies": {
-    "fjl": "^0.8.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
@@ -45,6 +43,10 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "karma": "^1.5.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.2",
+    "karma-phantomjs-launcher": "^1.0.4",
     "mocha": "^3.2.0",
     "requirejs": "^2.3.3",
     "yargs": "^6.6.0"

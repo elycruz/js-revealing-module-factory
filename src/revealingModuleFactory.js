@@ -53,7 +53,6 @@ function unConfigurableNamespace (nsString, obj, valueToSet)  {
  * @function revealingModule
  * @param nsString {String} - Name of module to store/get or namespace string which can also include module name to get/set at end.
  * @param [value=undefined] {*} - Value to set on module (revealing module function).
- * @parm [freeze=false] {Boolean} - Whether to freeze
  * @returns {*} - Self or found namespace/module.
  */
 
@@ -81,12 +80,20 @@ function unConfigurableNamespace (nsString, obj, valueToSet)  {
  *
  * @function revealingModuleFactory
  * @module revealingModuleFactory
+ * @param [freeze=false] {Boolean} - Flag for freezing your modules once they are set.
  * @returns {revealingModule} - Revealing module function (store members on itself and makes them un-'configurable' (as propert(y|ies))).
  */
 function revealingModuleFactory () {
     return function revealingModule (nsString, value) {
-        return typeof nsString === _undefined ?
-            revealingModule : unConfigurableNamespace(nsString, revealingModule, value);
+        var isPopulatedNsString = typeof nsString !== _undefined,
+            isPopulatedValue = typeof value !== _undefined;
+        if (isPopulatedNsString && !isPopulatedValue) { // Call as a setter-getter
+            return unConfigurableNamespace(nsString, revealingModule); // returns last set namespace object
+        }
+        else if (isPopulatedNsString && isPopulatedValue) { // Call as a setter
+            unConfigurableNamespace(nsString, revealingModule, value); // sets value on namespace
+        }
+        return revealingModule;
     };
 }
 

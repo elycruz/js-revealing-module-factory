@@ -17,6 +17,7 @@ const path =    require('path'),
     gulpIf =    require('gulp-if'),
     del =       require('del'),
     chalk =     require('chalk'),
+    KarmaServer = require('karma').Server,
     log = console.log.bind(console),
     packageJson =   require('./package.json'),
     gulpConfig =   require('./gulpfileConfig.json'),
@@ -58,12 +59,19 @@ function eslintTask () {
         .pipe(eslint.failAfterError());
 }
 
+function karmaTask (done) {
+    return new KarmaServer({
+        configFile: __dirname + '/karma.conf.js'
+        // singleRun: true
+    }, done).start();
+}
+
 function buildJs () {
     const hashAlgo = 'sha1',
         data = {hashAlgo: hashAlgo, date: new Date()};
     return gulp.src.apply(gulp, gulpConfig.js.srcArgs)
         .pipe(sourcemaps.init())
-        .pipe(rollup({exports: 'named', moduleName: iifeFileName, format: 'iife'}))
+        .pipe(rollup({moduleName: iifeFileName, format: 'iife'}))
         .pipe(babel())
         .pipe(gulpIf(!devMode, uglify()))
         .pipe(fncallback(function (file, enc, cb) {
@@ -81,6 +89,8 @@ function buildJs () {
 gulp.task('clean', clean);
 
 gulp.task('eslint', eslintTask);
+
+gulp.task('karma', karmaTask);
 
 gulp.task('build-js', ['eslint'], buildJs);
 

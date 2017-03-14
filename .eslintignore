@@ -1,3 +1,2 @@
 node_modules/**/*.js
-public/vendor/**/*.js
-public-dev/vendor/**/*.js
+dist
