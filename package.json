@@ -1,14 +1,16 @@
 {
   "name": "revealing-module-factory-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Revealing Module factory pattern.",
   "main": "dist/revealingModuleFactory.js",
+  "module": "src/revealingModuleFactory.js",
   "scripts": {
-    "test": "karma start"
+    "build": "gulp build",
+    "test": "karma start --single-run"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elycruz/revealing-module-factory-js.git"
+    "url": "git+https://github.com/elycruz/revealing-msodule-factory-js.git"
   },
   "keywords": [],
   "author": "Ely De La Cruz <elycruz -at- elycruz -dot- com",
